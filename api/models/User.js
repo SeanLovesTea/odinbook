@@ -26,7 +26,7 @@ const UserSchema = new Schema({
   profile: {
     work: String,
     study: String,
-    address: String,
+    location: String,
     member: String,
   },
   friends: [

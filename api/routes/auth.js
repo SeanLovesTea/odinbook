@@ -92,7 +92,8 @@ router.post('/login', (req,res, next) => {
         success: true,
         user: {
           _id: user._id,
-          username: user.username
+          username: user.username,
+          test: user
         }})
     })
   })(req, res, next)
@@ -153,5 +154,22 @@ router.post('/register', async (req, res, next) => {
   }
 })
 
+router.post('/add-info', async (req, res) => {
+  console.log(req.body)
+  try {
+    const { work, study, liveAt, userId } = req.body
+    const user = await User.findById(userId)
+
+    user.profile.work = work
+    user.profile.study = study
+    user.profile.location = liveAt
+
+    await user.save()
+
+    console.log(user)
+  } catch (error) {
+    console.log(error)
+  }
+})
 module.exports = router
 
