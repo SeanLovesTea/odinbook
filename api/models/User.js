@@ -23,6 +23,12 @@ const UserSchema = new Schema({
     token: String ,
     name: String ,
   },
+  profile: {
+    work: String,
+    study: String,
+    address: String,
+    member: String,
+  },
   friends: [
     {
       user: { type: Schema.Types.ObjectId, ref: 'User' },
