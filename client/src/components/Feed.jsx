@@ -82,8 +82,8 @@ function Feed() {
         <Post
           key={post._id}
           text={post.text}
-          author={post.author.username}
-          authorId={post.author._id}
+          author={post.author ? post.author.username : "Unknown User"}
+          authorId={post.author ? post.author._id : null}
           createdAt={ new Date(post.createdAt).toLocaleDateString()}
           createdAtTime={ new Date(post.createdAt).toLocaleTimeString()}
           postId={post._id}

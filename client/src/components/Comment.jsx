@@ -58,7 +58,7 @@ function Comment({postAuthorId, currentUserId, postId}) {
         >
           <div className='w-1/4'>
             <div className='text-xs'>Avatar</div>
-            <div className='text-xs'>{comment.author.username}</div>
+            <div className='text-xs'>{comment.author ? comment.author.username : "Unknown User"}</div>
             <div className='text-xs'>{new Date(comment.createdAt).toLocaleDateString()}</div>
             <div className='text-xs'>{new Date(comment.createdAt).toLocaleTimeString()}</div>
           </div>

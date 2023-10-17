@@ -47,7 +47,8 @@ passport.use(new FacebookStrategy({
         facebook: {
           id: profile.id,
           token: accessToken,
-          name: profile.displayName
+          name: profile.displayName,
+          // avatar: profile.picture
         }
       });
 

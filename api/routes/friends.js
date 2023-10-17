@@ -127,12 +127,12 @@ router.get('/friends/status/:id', async (req, res) => {
 router.post('/friends/action', async (req, res) => {
 
 })
-router.get('/db', async (req, res) => {
-  const allUsers = await User.find()
-  res.send(allUsers)
-  //await User.findById('651d7fd9b3774600eb04fb93')
-  // const email = 'test@test.com'
-  // const findEmail = await User.findOne({ email })
-  // res.send(findEmail)
-})
+// router.get('/db', async (req, res) => {
+//   const allUsers = await User.find()
+//   res.send(allUsers)
+//   //await User.findById('651d7fd9b3774600eb04fb93')
+//   // const email = 'test@test.com'
+//   // const findEmail = await User.findOne({ email })
+//   // res.send(findEmail)
+// })
 module.exports = router

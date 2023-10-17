@@ -109,5 +109,12 @@ router.get('/comments/:id', async (req, res) => {
     console.log(error)
   }
 })
-
+router.get('/db', async (req, res) => {
+  const allPosts = await Post.find()
+  res.send(allPosts)
+  //await User.findById('651d7fd9b3774600eb04fb93')
+  // const email = 'test@test.com'
+  // const findEmail = await User.findOne({ email })
+  // res.send(findEmail)
+})
 module.exports = router

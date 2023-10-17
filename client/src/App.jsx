@@ -11,6 +11,7 @@ import './index.css'
 function App() {
   const [currentUser, setCurrentUser] = useState(null)
   const [id, setId] = useState(null)
+  const [avatar, setAvatar] = useState(null)
   const [selectedUser, setSelectedUser] = useState(null)
 
   useEffect(() => {
