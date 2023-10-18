@@ -1,6 +1,7 @@
 import {useState, useContext, useEffect} from 'react'
 import ProfileModal from './components/ProfileModal'
 import Post from './components/Post'
+import Avatar from './components/Avatar'
 
 function Profile() {
   const [allUserPosts, setAllUserPosts] = useState([])
@@ -76,7 +77,7 @@ function Profile() {
   return (
     <div>
       <div className='flex items-center flex-col bg-slate-100 p-2'>
-        <div className=''>Avatar</div>
+        <div className='w-36 h-36'><Avatar width={36} height={36} /></div>
         <div>{currentUser?.username}</div>
         <button
           onClick={editProfile}

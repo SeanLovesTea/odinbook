@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react'
+import Avatar from './Avatar'
 
 function Comment({postAuthorId, currentUserId, postId}) {
 
@@ -57,7 +58,7 @@ function Comment({postAuthorId, currentUserId, postId}) {
           key={comment._id}
         >
           <div className='w-1/4'>
-            <div className='text-xs'>Avatar</div>
+            <div className='text-xs'><Avatar width={6} height={6} /></div>
             <div className='text-xs'>{comment.author ? comment.author.username : "Unknown User"}</div>
             <div className='text-xs'>{new Date(comment.createdAt).toLocaleDateString()}</div>
             <div className='text-xs'>{new Date(comment.createdAt).toLocaleTimeString()}</div>

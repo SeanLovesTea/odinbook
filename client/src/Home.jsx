@@ -9,7 +9,7 @@ function Home() {
   return (
     <div>
       <div className='flex p-4 bg-slate-200 '>
-        <Sidebar />
+        {/* <Sidebar /> */}
         <Feed />
       </div>
     </div>

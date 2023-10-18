@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import Comment from './Comment'
+import Avatar from './Avatar'
 
 function Post({
   text,
@@ -52,7 +53,7 @@ function Post({
     <div className='p-2 mt-2 mb-8 bg-slate-300 rounded-md border border-slate-400 relative'>
       <div className='flex p-4'>
         <div className='w-1/4'>
-          <div>Avatar</div>
+          <div><Avatar width={7} height={7} /></div>
           <div>{author}</div>
           <div className='overflow-hidden'>{createdAt}</div>
           <div className='overflow-hidden'>{createdAtTime}</div>
