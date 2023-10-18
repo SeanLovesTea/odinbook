@@ -23,18 +23,18 @@ function App() {
         const userData = await res.json()
 
         if (userData.success === true ) {
-          setCurrentUser(userData.user.username)
+          // console.log("current user test : ",userData.user )
+          setCurrentUser(userData.user)
           setId(userData.user._id)
-        } else {
-          setCurrentUser(null)
-          setId(null)
         }
+
       } else {
         console.log('auth failed')
         setCurrentUser(null)
         setId(null)
       }
     }
+    // console.log("current User : ", currentUser)
     checkAuth()
   },[])
   

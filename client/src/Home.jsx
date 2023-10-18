@@ -4,7 +4,7 @@ import AuthContext from './contexts/Contexts'
 import Feed from './components/Feed'
 import Sidebar from './components/Sidebar'
 
-function Page() {
+function Home() {
 
   return (
     <div>
@@ -16,4 +16,4 @@ function Page() {
   )
 }
 
-export default Page
+export default Home

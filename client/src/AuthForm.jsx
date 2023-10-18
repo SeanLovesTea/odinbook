@@ -37,7 +37,7 @@ function AuthForm() {
         // Authentication succeeded
         console.log("this is result : ", result);
         setId(result.user._id)
-        setCurrentUser(result.user.username)
+        setCurrentUser(result.user)
         setMessage(result.message)
       } else {
         // Authentication failed

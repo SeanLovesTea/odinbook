@@ -42,6 +42,17 @@ router.get('/allposts', async (req, res) => {
   }
   
 })
+router.get('/allposts/:id', async (req, res) => {
+  try {
+    const userId = req.params.id
+    const userPosts = await Post.find({ author: userId })
+
+    res.status(200).json({ message: 'User Posts found', data: userPosts })
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ message: 'Internal server error' })
+  }
+})
 router.post('/like', async (req, res) => {
   
   try {
@@ -110,7 +121,7 @@ router.get('/comments/:id', async (req, res) => {
   }
 })
 router.get('/db', async (req, res) => {
-  const allPosts = await Post.find()
+  const allPosts = await User.find()
   res.send(allPosts)
   //await User.findById('651d7fd9b3774600eb04fb93')
   // const email = 'test@test.com'

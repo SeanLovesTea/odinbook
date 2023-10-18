@@ -157,16 +157,16 @@ router.post('/register', async (req, res, next) => {
 router.post('/add-info', async (req, res) => {
   console.log(req.body)
   try {
-    const { work, study, liveAt, userId } = req.body
+    const { work, study, location, userId } = req.body
     const user = await User.findById(userId)
 
     user.profile.work = work
     user.profile.study = study
-    user.profile.location = liveAt
+    user.profile.location = location
 
     await user.save()
-
-    console.log(user)
+    res.status(200).json({ message: 'User about data saved', profile: user.profile })
+    console.log(user.profile)
   } catch (error) {
     console.log(error)
   }
