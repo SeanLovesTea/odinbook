@@ -45,25 +45,25 @@ function Comment({postAuthorId, currentUserId, postId}) {
       const data = await response.json()
 
       setAllComments(data)
-
+      console.log(data)
     } catch (error) {
       console.log(error)
     }
   }
   return (
     <div>
-      {allComments?.map((comment) => (
+      {allComments?.map((c) => (
         <div 
           className='flex p-4 bg-slate-200 border-2 border-slate-400 my-2'
-          key={comment._id}
+          key={c._id}
         >
           <div className='w-1/4'>
-            <div className='text-xs'><Avatar width={6} height={6} /></div>
-            <div className='text-xs'>{comment.author ? comment.author.username : "Unknown User"}</div>
-            <div className='text-xs'>{new Date(comment.createdAt).toLocaleDateString()}</div>
-            <div className='text-xs'>{new Date(comment.createdAt).toLocaleTimeString()}</div>
+            <div className='w-8 h-8'><Avatar imageURL={c.author?.image} /></div>
+            <div className='text-s'>{c.author ? c.author.username : "Unknown User"}</div>
+            <div className='text-xs'>{new Date(c.createdAt).toLocaleTimeString()}</div>
+            <div className='text-xs'>{new Date(c.createdAt).toLocaleDateString()}</div>
           </div>
-          <div className='flex-grow text-center'>{comment.text}</div>
+          <div className='flex-grow text-center'>{c.text}</div>
         </div>
       ))}
       <div className='border-2 border-slate-400 w-full rounded-md relative'>

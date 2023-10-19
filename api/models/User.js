@@ -29,6 +29,7 @@ const UserSchema = new Schema({
     location: String,
     member: String,
   },
+  image: String,
   friends: [
     {
       user: { type: Schema.Types.ObjectId, ref: 'User' },

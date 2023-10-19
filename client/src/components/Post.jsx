@@ -12,6 +12,7 @@ function Post({
   currentUserId,
   likesArray,
   likesLength,
+  imageURL
 }) {
  
   const [like, setLike] = useState(false)
@@ -53,10 +54,10 @@ function Post({
     <div className='p-2 mt-2 mb-8 bg-slate-300 rounded-md border border-slate-400 relative'>
       <div className='flex p-4'>
         <div className='w-1/4'>
-          <div><Avatar width={7} height={7} /></div>
-          <div>{author}</div>
-          <div className='overflow-hidden'>{createdAt}</div>
-          <div className='overflow-hidden'>{createdAtTime}</div>
+          <div className='w-16 h-16'><Avatar imageURL={imageURL}/></div>
+          <div className='text-xl'>{author}</div>
+          <div className=' text-xs overflow-hidden'>{createdAtTime}</div>
+          <div className=' text-xs overflow-hidden'>{createdAt}</div>
         </div>
         <div className='flex-grow text-center'>{text}</div>
       </div>

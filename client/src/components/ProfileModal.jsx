@@ -9,6 +9,7 @@ function ProfileModal({
   const [formInputWork, setFormInputWork] = useState('')
   const [formInputStudy, setFormInputStudy] = useState('')
   const [formInputLocation, setFormInputLocation] = useState('')
+  const [formInputImage, setFormInputImage] = useState(null)
 
    async function addAboutInfo(e) {
     console.log('in add info')
@@ -45,6 +46,7 @@ function ProfileModal({
       setFormInputStudy('')
       setFormInputLocation('')
    }
+
   return (
     <div >
       <form

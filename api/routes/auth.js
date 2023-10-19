@@ -28,39 +28,87 @@ passport.use(new LocalStrategy(async function verify(username, password, done) {
   }
 }))
 
+// passport.use(new FacebookStrategy({
+//   clientID: process.env.FACEBOOK_CLIENT_ID,
+//   clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+//   callbackURL: 'http://localhost:4000/return',
+//   state: true
+// }, async function verify(accessToken, refreshToken, profile, done) {
+
+//   try {
+//     const user = await User.findOne({ 'facebook.id': profile.id })
+
+//     if (user) {
+//       done(null, user)
+//     } else { 
+
+//       const newUser = new User({
+//         username: profile.displayName,
+//         password: '',
+//         facebook: {
+//           id: profile.id,
+//           token: accessToken,
+//           name: profile.displayName,
+//           image: profile,
+//         }
+//       });
+
+//       await newUser.save();
+//       console.log('saving user...')
+//       done(null, newUser);
+//     }
+//   } catch (error) {
+//     console.log(error)
+//     done(error)
+//   }
+// }))
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_CLIENT_ID,
   clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
   callbackURL: 'http://localhost:4000/return',
   state: true
 }, async function verify(accessToken, refreshToken, profile, done) {
-
   try {
-    const user = await User.findOne({ 'facebook.id': profile.id })
+    const user = await User.findOne({ 'facebook.id': profile.id });
 
     if (user) {
-      done(null, user)
-    } else { 
-      const newUser = new User({
-        username: profile.displayName,
-        password: '',
-        facebook: {
-          id: profile.id,
-          token: accessToken,
-          name: profile.displayName,
-          // avatar: profile.picture
-        }
+      done(null, user);
+    } else {
+      // Make a separate API request to fetch the profile picture URL from Facebook
+      const pictureResponse = await fetch(`https://graph.facebook.com/v13.0/${profile.id}/picture?redirect=false&type=large`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+        },
       });
 
-      await newUser.save();
-      console.log('saving user...')
-      done(null, newUser);
+      if (pictureResponse.status === 200) {
+        const pictureData = await pictureResponse.json();
+        console.log(pictureData)
+        const newUser = new User({
+          username: profile.displayName,
+          password: '',
+          facebook: {
+            id: profile.id,
+            token: accessToken,
+            name: profile.displayName,
+          },
+          image: pictureData.data.url
+        });
+
+        await newUser.save();
+        console.log('saving user...', newUser);
+        done(null, newUser);
+      } else {
+        console.error('Failed to fetch profile picture');
+        done(null, false);
+      }
     }
   } catch (error) {
-    console.log(error)
-    done(error)
+    console.log(error);
+    done(error);
   }
-}))
+}));
 
 
 passport.serializeUser((user, done) => {
@@ -154,22 +202,6 @@ router.post('/register', async (req, res, next) => {
   }
 })
 
-router.post('/add-info', async (req, res) => {
-  console.log(req.body)
-  try {
-    const { work, study, location, userId } = req.body
-    const user = await User.findById(userId)
 
-    user.profile.work = work
-    user.profile.study = study
-    user.profile.location = location
-
-    await user.save()
-    res.status(200).json({ message: 'User about data saved', profile: user.profile })
-    console.log(user.profile)
-  } catch (error) {
-    console.log(error)
-  }
-})
 module.exports = router
 

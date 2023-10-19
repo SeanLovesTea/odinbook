@@ -90,6 +90,7 @@ function Feed() {
           currentUserId={id}
           likesArray={post.likes}
           likesLength={post.likes.length}
+          imageURL={post.author?.image}
         />
       ))} 
     </div>

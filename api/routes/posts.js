@@ -46,6 +46,7 @@ router.get('/allposts/:id', async (req, res) => {
   try {
     const userId = req.params.id
     const userPosts = await Post.find({ author: userId })
+    .populate('author')
 
     res.status(200).json({ message: 'User Posts found', data: userPosts })
   } catch (error) {
@@ -120,7 +121,7 @@ router.get('/comments/:id', async (req, res) => {
     console.log(error)
   }
 })
-router.get('/db', async (req, res) => {
+router.get('/dbposts', async (req, res) => {
   const allPosts = await User.find()
   res.send(allPosts)
   //await User.findById('651d7fd9b3774600eb04fb93')
