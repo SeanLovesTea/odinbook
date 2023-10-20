@@ -24,7 +24,7 @@ function Logout() {
     }
   }
   return (
-    <div className='p-4 rounded-md bg-gray-500 mr-0 ml-auto'>
+    <div className='p-4 hover:bg-slate-200 mr-0 ml-auto'>
       <form onSubmit={logout} >
         <button type='submit'>Logout</button>
       </form>

@@ -11,34 +11,39 @@ import './index.css'
 function App() {
   const [currentUser, setCurrentUser] = useState(null)
   const [id, setId] = useState(null)
-  const [avatar, setAvatar] = useState(null)
   const [selectedUser, setSelectedUser] = useState(null)
+  const [imageURL, setImageURL] = useState(null)
 
   useEffect(() => {
     async function checkAuth() {
-      const res = await fetch('http://localhost:4000/profile',{
-        credentials: 'include'
-      } )
-      if (res.status === 200) {
-        const userData = await res.json()
-
-        if (userData.success === true ) {
-          // console.log("current user test : ",userData.user )
-          setCurrentUser(userData.user)
-          setId(userData.user._id)
+      try {
+        const res = await fetch('http://localhost:4000/profile', {
+          credentials: 'include'
+        });
+  
+        if (res.status === 200) {
+          const userData = await res.json()
+  
+          if (userData.success === true) {
+            setCurrentUser(userData.user)
+            setId(userData.user._id)
+            setImageURL(userData.user.image)
+          }
         }
-
-      } else {
+      } catch (error) {
+        console.log(error)
         console.log('auth failed')
         setCurrentUser(null)
         setId(null)
       }
     }
-    // console.log("current User : ", currentUser)
+  
     checkAuth()
-  },[])
+  }, [])
+  
   
   return (
+    <div className=" bg-slate-200 max-w-3xl flex flex-col mx-auto">
       <AuthContext.Provider value={{
         currentUser,
         setCurrentUser,
@@ -49,7 +54,7 @@ function App() {
         }}>
         {currentUser ? (
         <Router>
-          <Navbar />
+          <Navbar imageURL={imageURL} username={currentUser.username}/>
           <Routes>
             <Route path="/" element={<Home />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
@@ -58,7 +63,7 @@ function App() {
         </Router>
         ) : <AuthForm /> }
       </AuthContext.Provider>
+    </div>
   )
 }
-// currentUser ? <Page />  : <AuthForm />
 export default App 

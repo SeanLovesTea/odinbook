@@ -67,7 +67,7 @@ function Feed() {
         action="submit">
         <textarea
           className='h-full w-full resize-none p-2 pb-16' 
-          placeholder='Something on your mind?'
+        placeholder={`Something on your mind, ${currentUser.username}?`}
           type="text"
           onChange={e => setPostToAdd(e.target.value)}
           value={postToAdd}

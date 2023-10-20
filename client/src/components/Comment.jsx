@@ -45,7 +45,6 @@ function Comment({postAuthorId, currentUserId, postId}) {
       const data = await response.json()
 
       setAllComments(data)
-      console.log(data)
     } catch (error) {
       console.log(error)
     }
