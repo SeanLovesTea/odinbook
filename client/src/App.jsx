@@ -21,13 +21,14 @@ function App() {
           credentials: 'include'
         });
   
-        if (res.status === 200) {
+        if (res.ok) {
           const userData = await res.json()
   
           if (userData.success === true) {
             setCurrentUser(userData.user)
             setId(userData.user._id)
             setImageURL(userData.user.image)
+            console.log(imageURL, 'imageURL in app')
           }
         }
       } catch (error) {
@@ -36,12 +37,35 @@ function App() {
         setCurrentUser(null)
         setId(null)
       }
+      console.log(imageURL, 'imageURL in app')
     }
   
     checkAuth()
   }, [])
   
-  
+  useEffect(() => {
+    console.log(imageURL, 'imageURL in app useeffect')
+  },[imageURL])
+
+  async function logout(e) {
+    console.log('click')
+    e.preventDefault()
+    try {
+      const response = await fetch(`http://localhost:4000/logout`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.ok) {
+        setCurrentUser(null)
+        setId(null)
+      }
+    } catch (error) {
+      console.error('Fetch error:', error);
+    }
+  }
   return (
     <div className=" bg-slate-200 max-w-3xl flex flex-col mx-auto">
       <AuthContext.Provider value={{
@@ -54,7 +78,7 @@ function App() {
         }}>
         {currentUser ? (
         <Router>
-          <Navbar imageURL={imageURL} username={currentUser.username}/>
+          <Navbar imageURL={imageURL} username={currentUser.username} logout={logout}/>
           <Routes>
             <Route path="/" element={<Home />}></Route>
             <Route path="/profile" element={<Profile />}></Route>

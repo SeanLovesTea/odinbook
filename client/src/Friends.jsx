@@ -58,8 +58,9 @@ function Friends() {
       const data = await response.json()
       if (response.ok) {
         console.log("this is the friends data", data)
+        setAllFriends(data)
       }
-      setAllFriends(data)
+      
 
     } catch (error) {
       console.log(error)

@@ -39,8 +39,9 @@ router.get('/friends/:id',async (req, res) => {
     }
     const arrayOfFriendUsers = currentUser.friends
     .filter((friend) => friend.status === 'friend') // Use filter to select friends with status 'friend'
-    .map((friend) => friend.user);
-    // console.log("arrayOfFriendUsers : ", arrayOfFriendUsers)
+    .map((friend) => friend.user)
+    .filter((user) => user !== null)
+    
     res.json(arrayOfFriendUsers)
   } catch (error) {
     console.log(error)
