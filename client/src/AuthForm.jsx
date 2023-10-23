@@ -56,8 +56,34 @@ function AuthForm() {
         method: 'GET',
         credentials: 'include',
       })
-      // const data = res.json()
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  async function loginTestUser() {
+    const payload = {
+      username: 'Test_User',
+      password: 'testuser123',
+    }
+    try {
+      const res = await fetch('http://localhost:4000/login', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      })
+
+      const data = await res.json()
+
       console.log(res)
+      if(res.ok) {
+        setId(data.user._id)
+        setCurrentUser(data.user)
+        setMessage(data.message)
+      }
     } catch (error) {
       console.log(error)
     }
@@ -115,6 +141,11 @@ function AuthForm() {
         )}
         <div className='flex flex-col'>
           <a href="http://localhost:4000/login/facebook" className='bg-blue-500 p-2 cursor-pointer rounded-md text-white text-center mt-12' >Log in with Facebook</a>
+        </div>
+        <div 
+        onClick={loginTestUser}
+        className='p-2 my-2 bg-slate-400 rounded-md text-center cursor-pointer'>
+          Log in with Test User
         </div>
       </form>
     

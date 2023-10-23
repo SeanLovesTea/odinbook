@@ -1,4 +1,4 @@
-import Logout from './Logout'
+
 import { useState, useEffect } from 'react'
 import Avatar from './Avatar'
 import { Link } from 'react-router-dom'
@@ -11,6 +11,10 @@ function Header({imageURL, username, logout}) {
     console.log(imageURL, 'imageURL in ==NAVBAR== useeffect')
     setImage(imageURL)
   },[imageURL])
+
+  useEffect(() => {
+    setImage(imageURL)
+  },[])
 
 
   return (
