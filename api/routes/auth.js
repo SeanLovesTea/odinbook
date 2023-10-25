@@ -138,11 +138,8 @@ router.post('/login', (req,res, next) => {
       }
       return res.json({
         success: true,
-        user: {
-          _id: user._id,
-          username: user.username,
-          test: user
-        }})
+        user
+      })
     })
   })(req, res, next)
   

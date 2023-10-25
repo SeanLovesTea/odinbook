@@ -78,7 +78,7 @@ function App() {
         }}>
         {currentUser ? (
         <Router>
-          <Navbar imageURL={imageURL} username={currentUser.username} logout={logout}/>
+          <Navbar imageURL={currentUser.image} username={currentUser.username} logout={logout}/>
           <Routes>
             <Route path="/" element={<Home />}></Route>
             <Route path="/profile" element={<Profile />}></Route>

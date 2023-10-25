@@ -4,18 +4,8 @@ import Avatar from './Avatar'
 import { Link } from 'react-router-dom'
 
 function Header({imageURL, username, logout}) {
-  const [image, setImage] = useState(null)
+
   const [dropIsOpen, setDropIsOpen] = useState(false)
-
-  useEffect(() => {
-    console.log(imageURL, 'imageURL in ==NAVBAR== useeffect')
-    setImage(imageURL)
-  },[imageURL])
-
-  useEffect(() => {
-    setImage(imageURL)
-  },[])
-
 
   return (
     <div className='bg-slate-400 flex justify-centre rounded-md'>
@@ -36,13 +26,15 @@ function Header({imageURL, username, logout}) {
             <span className='text-sm'>Friends</span>
           </Link>
         </div>
+        
         <div
         onClick={() => setDropIsOpen(!dropIsOpen)} 
         className='p-2 mr-4 w-16 text-center ml-auto relative cursor-pointer hover:bg-slate-300 rounded-md'>
           <div>
-            <div ><Avatar imageURL={image}/></div>
+            <div ><Avatar imageURL={imageURL}/></div>
             <div className='text-sm absolute bottom-2 right-3'>Me &#11015;</div>
           </div>
+
           {dropIsOpen && 
           <div className='dropdown'>
           <div className='absolute overflow-auto bg-white top-20 right-0 z-10 rounded-md border border-slate-400'>
@@ -55,13 +47,9 @@ function Header({imageURL, username, logout}) {
                   className='p-4 hover:bg-slate-200 mr-0 ml-auto'>
                     Logout
                 </div>
-                  {/* <Logout /> */}
                 </div>
-                
             </div>
             </div>}
-            
-          {/* <div>{username}</div> */}
         </div>
         
     </div>
